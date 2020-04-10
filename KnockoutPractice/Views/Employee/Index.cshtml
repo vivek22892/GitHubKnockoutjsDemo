@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="~/Scripts/jquery.datatable.js"></script>
+    <link href="~/Content/jquery.datable.css" rel="stylesheet" />
+    <script src="~/Scripts/knockout.validation.js"></script>
+
+</head>
+<body>
+    <form>
+        <div id="Scs" class="alert alert-success"></div>
+        <div id="Dgrmsg" class="alert alert-danger"></div>
+        <table style="position: relative; top: 0; bottom: 0; left: 0; right: 0; width: 100%">
+            <tr>
+                <td>
+                    <!--Bind the TextBoxes in the Table to the observable properties defined into the ViewModel -->
+                    <table id="tbldml">
+                        <tr>
+                            <td>EmpNo</td>
+                            <td>
+                                <input type="text" id="txteno" name="txteno" data-bind="value: $root.EmpNo" placeholder="Enter EmpNo" />
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>EmpName</td>
+                            <td>
+                                <input type="text" id="txtename" name="txtename" data-bind="value: $root.EmpName" placeholder="Enter EmpName" />
+                             </td>
+                        </tr>
+                        <tr>
+                            <td>Salary</td>
+                            <td>
+                                <input type="text" id="txtsal" name="txtsal" data-bind="value: $root.Salary" placeholder="Enter Salary" />
+                               </td>
+                        </tr>
+                        <tr>
+                            <td>DeptName</td>
+                            <td>
+                                <input type="text" id="txtdname" name="txtdname" data-bind="value: $root.DeptName" placeholder="Enter DeptName" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Designation</td>
+                            <td>
+                                <input type="text" id="txtdesig" name="txtdesig" data-bind="value: $root.Designation" placeholder="Enter Designation" />
+                                 </td>
+                </td>
+            </tr>
+            <tr>
+                <!--The click binding has the JavaScirpt methods passed to it-->
+                <td>
+                    <button type="submit" class="btn btn-info" data-bind="click :$root.save">Save</button></td>
+                <td>
+                    <button type="submit" class="btn btn-info" data-bind="click: $root.update">Update</button></td>
+            </tr>
+        </table>
+        </td>
+                <td style="align: right">
+                    <div style="overflow: auto; max-height: 500px;">
+                        <!--If the lenght of the Employees is greater than 0 then visible the Table-->
+                        <table id="dtBasicExample" data-bind="visible:  Employees().length>0" style="border: double; margin-right: auto; float: right" class="table table-striped table-bordered table-sm" cellspacing="0" width="100% ">
+                            <thead>
+                                <tr>
+                                    <th class="th-sm">EmpNo
+
+                                    </th>
+                                    <th class="th-sm">EmpName
+
+                                    </th>
+                                    <th class="th-sm">Salary
+
+                                    </th>
+                                    <th class="th-sm">DeptName
+
+                                    </th>
+                                    <th class="th-sm">Designation
+                                    </th>
+                                    <th class="th-sm">Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <!--Iterate through an observableArray using foreach-->
+                            <tbody data-bind="foreach:  Employees">
+                                <tr style="border: solid" data-bind="click: $root.getselectedemployee" id="updtr">
+                                    <td><span data-bind="text:  EmpNo"></span></td>
+                                    <td><span data-bind="text:  EmpName"></span></td>
+                                    <td><span data-bind="text: Salary"></span></td>
+                                    <td><span data-bind="text: DeptName"></span></td>
+                                    <td><span data-bind="text: Designation"></span></td>
+                                    <td>
+                                        <button class="btn btn-info" data-bind="click: $root.deleterec,clickBubble: false">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+        </tr>
+        </table>
+    </form>
+    <script src="~/Scripts/Employee/Employee.js"></script>
+</body>
+</html>
